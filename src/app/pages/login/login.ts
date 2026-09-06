@@ -3,6 +3,7 @@ import { Component, inject } from '@angular/core';
 import { environment } from '../../../environments/environment.development';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { tokenConstant } from '../../core/globalConstants/tokenConstant';
 @Component({
   imports: [FormsModule],
   selector: 'app-login',
@@ -19,15 +20,14 @@ export class Login {
 
   }
   onLogin() {
-    debugger;
     this.http.post(environment.API_URL + "login", this.login).subscribe({
       next: (res: any) => {
         if (res.result) {
-          this.router.navigateByUrl('/dashboard');
+          localStorage.setItem(tokenConstant.TOKEN_KEY, JSON.stringify(res.data));
+          this.router.navigateByUrl('/Admin');
         } else {
           alert("Login failed");
           console.log(res.message);
-          debugger;
         }
       }
 
