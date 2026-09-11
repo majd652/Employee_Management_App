@@ -87,11 +87,7 @@ export class AddEmployee {
     });
   }
 
-  get employeeName() { return this.employeeForm.get('employeeName'); }
-  get contactNo() { return this.employeeForm.get('contactNo'); }
-  get emailId() { return this.employeeForm.get('emailId'); }
-  get deptId() { return this.employeeForm.get('deptId'); }
-  get password() { return this.employeeForm.get('password'); }
-  get gender() { return this.employeeForm.get('gender'); }
-  get role() { return this.employeeForm.get('role'); }
+  get f (){
+    return this.employeeForm.controls;
+  }
 }
