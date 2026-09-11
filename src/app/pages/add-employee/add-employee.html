@@ -4,73 +4,109 @@
     <p class="form-subtitle">Fill in the details below to add a new employee to the system</p>
   </div>
 
-  <form class="employee-form">
+  <form class="employee-form" [formGroup]="employeeForm">
     <div class="form-grid">
-    
+
       <!-- Employee Name -->
       <div class="form-group">
         <label for="employeeName">Employee Name</label>
-        <input type="text" id="employeeName" name="employeeName" placeholder="Enter full name" [(ngModel)]="employeeObj.employeeName"/>
+        <input type="text" id="employeeName" formControlName="employeeName" placeholder="Enter full name" />
+        @if (employeeName?.touched && employeeName?.errors){
+        <div class="error-message">
+          {{ employeeName?.errors | validationMessage}}
+        </div>
+        }
       </div>
 
       <!-- Contact Number -->
       <div class="form-group">
         <label for="contactNo">Contact Number</label>
-        <input type="tel" id="contactNo" name="contactNo" placeholder="Enter contact number" [(ngModel)]="employeeObj.contactNo" />
+        <input type="tel" id="contactNo" formControlName="contactNo" placeholder="Enter contact number" />
+        @if (contactNo?.touched && contactNo?.errors){
+        <div class="error-message">
+          {{ contactNo?.errors | validationMessage}}
+        </div>
+        }
       </div>
 
       <!-- Email -->
       <div class="form-group">
         <label for="emailId">Email Address</label>
-        <input type="email" id="emailId" name="emailId" placeholder="Enter email address" [(ngModel)]="employeeObj.emailId" />
+        <input type="email" id="emailId" formControlName="emailId" placeholder="Enter email address" />
+        @if (emailId?.touched && emailId?.errors){
+        <div class="error-message">
+          {{ emailId?.errors | validationMessage}}
+        </div>
+        }
       </div>
 
       <!-- Department Dropdown -->
       <div class="form-group">
         <label for="deptId">Department</label>
-        <select id="deptId" name="deptId" (change)="onChangeParent($event)" [(ngModel)]="employeeObj.deptId">
-            @for ( dept of deparmentList(); track dept.departmentId) {
+        <select id="deptId" formControlName="deptId" (change)="onChangeParent($event)">
+          <option value="">Select Department</option>
+          @for ( dept of deparmentList(); track dept.departmentId) {
           <option [value]="dept.departmentId">{{ dept.departmentName }}</option>
-            }
+          }
         </select>
+        @if (deptId?.touched && deptId?.errors){
+        <div class="error-message">
+          {{ deptId?.errors | validationMessage}}
+        </div>
+        }
       </div>
 
       <!-- Password -->
       <div class="form-group">
         <label for="password">Password</label>
-        <input type="password" id="password" name="password" placeholder="Enter password" [(ngModel)]="employeeObj.password" />
+        <input type="password" id="password" formControlName="password" placeholder="Enter password" />
+        @if (password?.touched && password?.errors){
+        <div class="error-message">
+          {{ password?.errors | validationMessage}}
+        </div>
+        }
       </div>
 
       <!-- Gender Dropdown -->
       <div class="form-group">
         <label for="gender">Gender</label>
-        <select id="gender" name="gender" [(ngModel)]="employeeObj.gender">
+        <select id="gender" formControlName="gender">
           <option value="">Select Gender</option>
           <option value="Male">Male</option>
           <option value="Female">Female</option>
           <option value="Other">Other</option>
         </select>
+        @if (gender?.touched && gender?.errors){
+        <div class="error-message">
+          {{ gender?.errors | validationMessage}}
+        </div>
+        }
       </div>
 
-      
+
       <div class="form-group">
         <label for="childDeptId">Child Department</label>
-        <select id="childDeptId" name="childDeptId" [(ngModel)]="employeeObj.deptId">
+        <select id="childDeptId" name="childDeptId">
           @for ( childDep of childDepartmentList(); track $index){
-            <option [value]="childDep.childDeptId">{{ childDep.departmentName }}</option>
+          <option [value]="childDep.childDeptId">{{ childDep.departmentName }}</option>
           }
         </select>
       </div>
 
-       <div class="form-group">
+      <div class="form-group">
         <label for="role">Role</label>
-        <input type="text" id="role" name="role" placeholder="Enter role" [(ngModel)]="employeeObj.role" />
+        <input type="text" id="role" formControlName="role" placeholder="Enter role" />
+        @if (role?.touched && role?.errors){
+        <div class="error-message">
+          {{ role?.errors | validationMessage}}
+        </div>
+        }
       </div>
     </div>
 
     <div class="form-actions">
       <button type="button" class="btn btn-secondary">Cancel</button>
-      <button type="submit" class="btn btn-primary" (click)="onCreateEmployee()">Add Employee</button>
+      <button type="button" class="btn btn-primary" (click)="onCreateEmployee()">Add Employee</button>
     </div>
   </form>
 </div>
