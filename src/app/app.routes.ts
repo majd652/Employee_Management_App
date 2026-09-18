@@ -10,7 +10,8 @@ export const routes: Routes = [
         children:[
             {path:"dashboard",canActivate:[guardGuard],loadComponent :()=> import('./pages/dashboard/dashboard').then(m => m.Dashboard)},
             {path:"employees",canActivate:[guardGuard],loadComponent:()=> import('./pages/employees/employees').then (m => m.Employees)},
-            {path:"add-employee",canActivate:[guardGuard],loadComponent:()=> import('./pages/add-employee/add-employee').then (m => m.AddEmployee)}
+            {path:"add-employee",canActivate:[guardGuard],loadComponent:()=> import('./pages/add-employee/add-employee').then (m => m.AddEmployee)},
+            {path:"add-employee/:id",canActivate:[guardGuard],loadComponent:()=> import('./pages/add-employee/add-employee').then (m => m.AddEmployee)}
         ]
     },
 ];

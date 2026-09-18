@@ -3,7 +3,7 @@ import { Component, inject } from '@angular/core';
 import { environment } from '../../../environments/environment.development';
 import { Router } from '@angular/router';
 import { FormsModule,FormGroup, Validators } from '@angular/forms';
-import { tokenConstant } from '../../core/globalConstants/tokenConstant';
+import { globalConstant } from '../../core/globalConstants/tokenConstant';
 import { EmployeeFormValidationPipe } from '../../core/pipes/employee-form-validation-pipe';
 import { FormBuilder,ReactiveFormsModule } from '@angular/forms';
 import { LoginModel } from '../../core/models/login.model';
@@ -38,7 +38,7 @@ export class Login {
     this.http.post(environment.API_URL + "login", this.loginForm.value).subscribe({
       next: (res: any) => {
         if (res.result) {
-          localStorage.setItem(tokenConstant.TOKEN_KEY, JSON.stringify(res.data));
+          localStorage.setItem(globalConstant.TOKEN_KEY, JSON.stringify(res.data));
           this.router.navigateByUrl('/Admin');
         } else {
           alert("Login failed");
