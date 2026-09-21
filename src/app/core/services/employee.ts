@@ -21,4 +21,7 @@ export class Employee {
     updateEmplyee(id: number, emp: EmployeeModel): Observable<EmployeeModel> {
         return this.http.put<EmployeeModel>(environment.API_URL + globalConstant.API_METHOUD.UPDATE_EMPLOYEE + id, emp)
     }
+    deleteEployee(id: number): Observable<any> {
+        return this.http.delete<any>(environment.API_URL + globalConstant.API_METHOUD.DELETE_EMPLOYEE + id)
+    }
 }
