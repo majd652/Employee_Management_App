@@ -12,48 +12,23 @@ ng serve
 
 Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
 
-## Code scaffolding
+# Good to know 
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+this project made with a real open source api u can cheack on (https://projectapi.gerasim.in/index.html) under the name "EmployeeManagement" 
 
-```bash
-ng generate component component-name
-```
+# a demo accound to login made & you can simply acsses so many account on if u cheack the api link 
+username : majd@gmail.com
+password : 11223344
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+# what dose this website do 
 
-```bash
-ng generate --help
-```
+add employees 
+edit employees
+delete employees 
+view employees 
 
-## Building
+# prograam languages used in this project
 
-To build the project run:
+Angular, TypeScript, HTML, CSS
 
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+# Thanks for cheacking my project 
