@@ -42,18 +42,13 @@
 
       <!-- Department Dropdown -->
       <div class="form-group">
-        <label for="deptId">Department</label>
-        <select id="deptId" formControlName="deptId" (change)="onChangeParent($event)">
+        <label for="parentDeptId">Department</label>
+        <select id="parentDeptId" (change)="onChangeParent($event)">
           <option value="">Select Department</option>
           @for ( dept of deparmentList(); track dept.departmentId) {
           <option [value]="dept.departmentId">{{ dept.departmentName }}</option>
           }
         </select>
-        @if (f['deptId']?.touched && f['deptId']?.errors){
-        <div class="error-message">
-          {{ f['deptId']?.errors | validationMessage}}
-        </div>
-        }
       </div>
 
       <!-- Password -->
@@ -86,11 +81,17 @@
 
       <div class="form-group">
         <label for="childDeptId">Child Department</label>
-        <select id="childDeptId" name="childDeptId">
+        <select id="childDeptId" formControlName="deptId">
+          <option value="">Select Child Department</option>
           @for ( childDep of childDepartmentList(); track $index){
           <option [value]="childDep.childDeptId">{{ childDep.departmentName }}</option>
           }
         </select>
+        @if (f['deptId']?.touched && f['deptId']?.errors){
+        <div class="error-message">
+          {{ f['deptId']?.errors | validationMessage}}
+        </div>
+        }
       </div>
 
       <div class="form-group">

@@ -6,7 +6,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { Employee } from '../../core/services/employee';
 import { Deparment } from '../../core/services/deparment';
 import { childDepartmentDataResponse, DepartmentDataResponse, DepartmentRes } from '../../core/interfaces/deparmentInterface';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   imports: [CommonModule, EmployeeFormValidationPipe, ReactiveFormsModule],
   selector: 'app-add-employee',
@@ -22,13 +22,14 @@ export class AddEmployee {
   employeeForm: FormGroup;
   empoyeeEidtId: number = 0;
   ActivatedRoute = inject(ActivatedRoute)
+  router = inject(Router)
 
   constructor(private fb: FormBuilder) {
     this.employeeForm = this.fb.group({
       employeeName: ['', [Validators.required, Validators.minLength(3)]],
       contactNo: ['', [Validators.required, Validators.pattern(/^[0-9]{10,15}$/)]],
       emailId: ['', [Validators.required, Validators.email]],
-      deptId: [0, [Validators.required]],
+      deptId: [null, [Validators.required]],
       password: ['', [Validators.required, Validators.minLength(6)]],
       gender: ['', [Validators.required]],
       role: ['', [Validators.required, Validators.minLength(2)]]
@@ -60,6 +61,8 @@ export class AddEmployee {
   onChangeParent($event: any) {
     const id = $event.target.value;
 
+    this.employeeForm.get('deptId')?.reset();
+
     this.depSrv.getAllChildDeparments(id).subscribe({
       next: (res: DepartmentRes) => {
         this.childDepartmentList.set(res.data)
@@ -78,13 +81,19 @@ export class AddEmployee {
   }
   onCreateEmployee() {
     if (this.employeeForm.valid) {
-      this.employeeObj = this.employeeForm.value;
+      this.employeeObj = {
+        ...this.employeeForm.value,
+        employeeId: 0,
+        deptId: Number(this.employeeForm.value.deptId),
+        createdDate: new Date().toISOString()
+      };
       this.empSev.crateEmployee(this.employeeObj).subscribe({
         next: (res: EmployeeModel) => {
           alert('Employee created successfully');
           this.employeeForm.reset();
         },
         error: (err: any) => {
+          alert('Error creating employee: ' + (err.error?.message || 'Server error - check API endpoint'));
           console.log(err)
         }
       })

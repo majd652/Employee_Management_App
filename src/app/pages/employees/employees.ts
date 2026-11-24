@@ -24,13 +24,6 @@ export class Employees {
   }
 
   addEmployee() {
-    this.empSrv.getAllEmployees().pipe(
-      takeUntilDestroyed(this.destroyRef)
-    ).subscribe({
-      next: (res) => {
-        console.log(res);
-      }
-    });
     this.router.navigateByUrl('/Admin/add-employee');
   }
   onDeleteEmployee(id: number) {
